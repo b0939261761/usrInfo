@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  usr-info:
+    build: ./
+    command: >
+      bash -c "
+      cd /app
+      && npm install --only=production
+      && node index.js"
+    ports:
+      - $SERVER_PORT:$SERVER_PORT
+    volumes:
+       - ./:/app
+    env_file: .env
+    depends_on:
+      - usrInfoDB
+
+  usrInfoDB:
+    image: postgres:13.1-alpine
+    ports:
+      - $DB_PORT:5432
+    volumes:
+      - db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: $DB_USER
+      POSTGRES_PASSWORD: $DB_PASSWORD
+      POSTGRES_DB: $DB_NAME
+
+volumes:
+  db:
+
+networks:
+  default:
+    external: true
+    name: ufop
