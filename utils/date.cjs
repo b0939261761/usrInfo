@@ -1,4 +1,4 @@
-const { zeroStart } = require('./tools.cjs');
+const zeroStart = (num, digits = 2) => num.toString().padStart(digits, '0');
 
 const getDateTime = (date = new Date()) => (date instanceof Date ? date : new Date(date));
 

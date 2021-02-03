@@ -1,5 +1,5 @@
 import mysql from 'mysql2/promise';
-import { formatDate, addDays } from '../utils/date.cjs';
+import { formatDate, addDays } from '../utils/date.js';
 
 const options = {
   host: process.env.TURBOSMS_DB_HOST,

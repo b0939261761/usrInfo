@@ -53,24 +53,24 @@ const sendContacts = async () => {
 
       const proxy = await proxyItem.get();
       const ufopItemParse = await grabber({ ufopItem, proxy });
-      await proxyItem.resetError();
       const ufopItemDB = await insertDBUfop(ufopItemParse);
       await isNewUsrInfoUfop(ufopItem);
       await sendMarketing(ufopItemDB);
       await sendContacts();
     } catch (err) {
       const errMessage = err.message;
-      const time = formatDate('YYYY-MM-DD HH:mm:ss');
-      if (errMessage.startsWith('INVALID_PROXY')) {
-        await proxyItem.setError();
-        console.error(time, errMessage);
-      } else if (errMessage === 'ERROR_CAPTCHA_UNSOLVABLE') {
-        console.error(time, errMessage);
-      } else {
-        console.error(time, err);
-        if (['STRUCTURE_ERROR'].includes(errMessage)) return;
-        await setTimeout(process.env.ERROR_TIMEOUT);
-      }
+
+      const isInvalidProxy = errMessage.startsWith('INVALID_PROXY');
+      const isCaptchaUnsolvable = errMessage === 'ERROR_CAPTCHA_UNSOLVABLE';
+      const isStructureError = errMessage === 'STRUCTURE_ERROR';
+
+      const consoleMessage = isInvalidProxy || isCaptchaUnsolvable || isStructureError
+        ? errMessage
+        : err;
+
+      console.error(formatDate('YYYY-MM-DD HH:mm:ss'), consoleMessage);
+      if (isStructureError) return;
+      await setTimeout(process.env.ERROR_TIMEOUT);
     } finally {
       await proxyItem.setLastActive();
     }

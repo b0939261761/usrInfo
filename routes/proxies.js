@@ -1,8 +1,10 @@
-const routes = require('express').Router();
-const Busboy = require('busboy');
-const readline = require('readline');
-const { catchAsyncRoute } = require('../utils/tools.cjs');
-const { getProxies, addProxies, removeProxies, getAmountProxy, resetErrorProxies } = require('../db/index.cjs');
+import express from 'express';
+import readline from 'readline';
+import Busboy from 'busboy';
+import { getProxies, addProxies, removeProxies } from '../db/index.js';
+import { catchAsyncRoute } from '../utils/tools.js';
+
+const routes = express.Router();
 
 routes.get('', catchAsyncRoute(async (req, res) => res.json(await getProxies())));
 
@@ -46,7 +48,7 @@ routes.post('', catchAsyncRoute(async (req, res, next) => {
     fieldNames.splice(fieldNames.indexOf(fieldName), 1);
     if (!fieldNames.length) {
       if (errors.length) return next(errors.length === 1 ? errors[0] : errors);
-      return res.redirect('proxies/amount');
+      return res.redirect('proxies');
     }
 
     return null;
@@ -63,11 +65,4 @@ routes.get('/remove', catchAsyncRoute(async (req, res) => {
   res.json(await getProxies());
 }));
 
-routes.get('/amount', catchAsyncRoute(async (req, res) => res.json(await getAmountProxy())));
-
-routes.get('/reset-error', catchAsyncRoute(async (req, res) => {
-  await resetErrorProxies();
-  res.json(await getProxies());
-}));
-
-module.exports = routes;
+export default routes;

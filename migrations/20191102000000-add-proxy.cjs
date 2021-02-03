@@ -5,7 +5,6 @@ module.exports = {
     CREATE TABLE "${tableName}" (
       id SERIAL PRIMARY KEY,
       server VARCHAR(21) NOT NULL DEFAULT '' UNIQUE,
-      "amountErrors" INTEGER NOT NULL DEFAULT 0,
       "lastActive" TIMESTAMP WITH TIME ZONE,
       protocol varchar(5) NOT NULL DEFAULT '';
       username VARCHAR(100) NOT NULL DEFAULT '',

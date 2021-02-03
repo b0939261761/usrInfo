@@ -1,11 +1,11 @@
 // eslint-disable-next-line import/no-unresolved, node/no-missing-import
 import { setTimeout } from 'timers/promises';
-import db from '../db/index.cjs';
+import { getProxy, setLastActiveProxy } from '../db/index.js';
 
 export default class {
   async get() {
     this.id = null;
-    const proxy = await db.getProxy();
+    const proxy = await getProxy();
     if (!proxy) throw new Error('NO_PROXY');
     console.info(proxy);
     const { id, username, password, lastActive } = proxy;
@@ -18,12 +18,8 @@ export default class {
     return { server, username, password };
   }
 
-  resetError() { return db.resetErrorProxy(this.id); }
-
-  setError() { return db.setErrorProxy(this.id); }
-
   setLastActive() {
-    if (this.id) return db.setLastActiveProxy(this.id);
+    if (this.id) return setLastActiveProxy(this.id);
     return true;
   }
 }

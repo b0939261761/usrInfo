@@ -1,4 +1,3 @@
-import proxies from './proxies.cjs';
 import organizations from './organizations.cjs';
 import {
   notExistsOrganization,
@@ -16,6 +15,14 @@ import {
   setStatusCRMPerson
 } from './persons.js';
 
+import {
+  getProxy,
+  getProxies,
+  removeProxies,
+  setLastActiveProxy,
+  addProxies
+} from './proxies.js';
+
 export {
   notExistsOrganization,
   addOrganization,
@@ -26,7 +33,12 @@ export {
   notExistsPerson,
   addPerson,
   getStatusCRMNonePerson,
-  setStatusCRMPerson
+  setStatusCRMPerson,
+  getProxy,
+  getProxies,
+  removeProxies,
+  setLastActiveProxy,
+  addProxies
 };
 
 export default {
@@ -40,5 +52,9 @@ export default {
   addPerson,
   getStatusCRMNonePerson,
   setStatusCRMPerson,
-  ...proxies
+  getProxy,
+  getProxies,
+  removeProxies,
+  setLastActiveProxy,
+  addProxies
 };

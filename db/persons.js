@@ -1,6 +1,6 @@
 import slonik from 'slonik';
-import { parsePerson } from '../organization/parse.js';
 import connection from './db.cjs';
+import { parsePerson } from '../organization/parse.js';
 
 //= ============================================================================
 
