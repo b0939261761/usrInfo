@@ -16,7 +16,7 @@ services:
       - usrInfoDB
 
   usrInfoDB:
-    image: postgres:13.1-alpine
+    image: postgres:13.2-alpine
     ports:
       - $DB_PORT:5432
     volumes:
