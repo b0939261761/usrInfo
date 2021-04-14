@@ -9,6 +9,7 @@ const routes = express.Router();
 routes.get('', catchAsyncRoute(async (req, res) => res.json(await getProxies())));
 
 routes.post('', catchAsyncRoute(async (req, res, next) => {
+  await removeProxies();
   const patternServer = new RegExp(
     '(((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}'
     + '(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))'
@@ -58,11 +59,6 @@ routes.post('', catchAsyncRoute(async (req, res, next) => {
   busboy.on('file', busboyOnFile);
   busboy.on('finish', () => !fieldNames.length && next(new Error('NO_FILES')));
   return req.pipe(busboy);
-}));
-
-routes.get('/remove', catchAsyncRoute(async (req, res) => {
-  await removeProxies();
-  res.json(await getProxies());
 }));
 
 export default routes;
