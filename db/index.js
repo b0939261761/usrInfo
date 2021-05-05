@@ -1,4 +1,5 @@
-import organizations from './organizations.cjs';
+// import organizations from './organizations.cjs';
+
 import {
   notExistsOrganization,
   addOrganization,
@@ -42,7 +43,6 @@ export {
 };
 
 export default {
-  ...organizations,
   notExistsOrganization,
   addOrganization,
   setStatusCRMOrganization,

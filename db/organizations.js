@@ -77,7 +77,7 @@ export const addOrganization = data => {
       ${persons}, ${dateAndRecordNumber}, ${contacts}, ${statusCRM},
       ${phone1}, ${phone2}, ${email1}, ${email2}, ${dateRegistration}, ${capital}
     )
-      RETURNING *;
+      RETURNING *
   `);
 };
 

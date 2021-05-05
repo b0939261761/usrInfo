@@ -1,7 +1,4 @@
-// import dotenv from 'dotenv';
 import request from '../utils/request.js';
-
-// dotenv.config();
 
 const baseUrl = 'http://rucaptcha.com/';
 const baseParams = { key: process.env.RUCAPTCHA_KEY, json: 1 };

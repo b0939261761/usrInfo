@@ -9,8 +9,23 @@
   <title>Главная</title>
 </head>
 <body>
-  <div class="form">
-    <a class="btn" href="/proxies/add.html">Добавление прокси</a>
-  </div>
+  <form
+    action="/proxies"
+    method="post"
+    enctype="multipart/form-data"
+    autocomplete="off"
+    class="form"
+  >
+    <label class="btn">
+      Выбрать и отправить файл Прокси
+      <input
+        type="file"
+        name="file"
+        accept=".csv"
+        class="input-file__input"
+        onchange="this.form.submit()"
+      />
+    </label>
+  </form>
 </body>
 </html>

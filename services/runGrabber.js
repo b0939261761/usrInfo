@@ -62,11 +62,11 @@ const sendContacts = async () => {
 
       const isInvalidProxy = errMessage.startsWith('INVALID_PROXY');
       const isCaptchaUnsolvable = errMessage === 'ERROR_CAPTCHA_UNSOLVABLE';
-      const isStructureError = errMessage === 'STRUCTURE_ERROR';
+      const isStructureError = errMessage.includes('STRUCTURE_ERROR');
 
-      const consoleMessage = isInvalidProxy || isCaptchaUnsolvable || isStructureError
-        ? errMessage
-        : err;
+      let consoleMessage = err;
+      if (isInvalidProxy || isCaptchaUnsolvable) consoleMessage = errMessage;
+      else if (isStructureError) consoleMessage = 'STRUCTURE_ERROR';
 
       console.error(formatDate('YYYY-MM-DD HH:mm:ss'), consoleMessage);
       if (isStructureError) return;

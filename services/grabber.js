@@ -30,17 +30,16 @@ const getValuesPerson = el => {
 
 const getValuesOrganization = el => {
   const rowCount = el.querySelectorAll('tr').length;
-
-  if (rowCount === 29) {
+  if (rowCount === 30) {
     return {
       legalForm: el.rows[1].cells[1].textContent.trim(),
       name: el.rows[2].cells[1].textContent.trim(),
-      dataAuthorizedCapital: el.rows[6].cells[1].textContent.trim(),
-      founders: el.rows[7].cells[1].textContent.trim(),
-      activities: el.rows[9].cells[1].textContent.trim(),
-      persons: el.rows[11].cells[1].textContent.trim(),
-      dateAndRecordNumber: el.rows[13].cells[1].textContent.trim(),
-      contacts: el.rows[28].cells[1].textContent.trim()
+      dataAuthorizedCapital: el.rows[7].cells[1].textContent.trim(),
+      founders: el.rows[8].cells[1].textContent.trim(),
+      activities: el.rows[10].cells[1].textContent.trim(),
+      persons: el.rows[12].cells[1].textContent.trim(),
+      dateAndRecordNumber: el.rows[14].cells[1].textContent.trim(),
+      contacts: el.rows[29].cells[1].textContent.trim()
     };
   } if (rowCount === 17) {
     return {
