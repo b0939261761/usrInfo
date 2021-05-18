@@ -1,4 +1,3 @@
-
 const functionName = 'updateAtTimestamp';
 
 module.exports = {
