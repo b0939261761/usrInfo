@@ -98,16 +98,18 @@ export default async ({ ufopItem, proxy }) => {
     await page.waitForTimeout(1000);
     await page.click('recaptcha-wrapper button');
 
-    const searchResultTable = await page.waitForSelector('search-result-table');
-    const textError = await searchResultTable.$('.text-danger');
-    if (textError) {
-      if (await textError.evaluate(el => el.textContent.includes('знайдено'))) return ufopItem;
+    const selector = await Promise.race([
+      page.waitForSelector('.table-wrapper tr'),
+      page.waitForSelector('search-result-table .text-danger')
+    ]);
+
+    if (await selector.evaluate(el => el.tagName === 'P')) {
+      const textErrorValue = await selector.textContent();
+      if (textErrorValue.includes('знайдено')) return { ...ufopItem, statusCRM: 'not found' };
       throw new Error('INVALID_PROXY_TRY_LATER');
     }
 
-    await page.waitForSelector('.table-wrapper tr');
     const rows = await page.$$('.table-wrapper tr');
-
     let rowNumber = -1;
     for (let i = 0; i < rows.length; ++i) {
       if (ufopItem.isOrganization) {
