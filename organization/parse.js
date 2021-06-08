@@ -1,4 +1,4 @@
-const getPhone = value => value?.[1].replace(/\)|\(|-|,/g, '') || '';
+const getPhone = value => (value?.[1].replace(/\)|\(|-|,/g, '') || '').substring(0, 13);
 
 //= ============================================================================
 

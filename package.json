@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "serve": "nodemon -r dotenv/config index.js dotenv_config_path=.env.development --inspect"
+    "start": "node -r dotenv/config index.js dotenv_config_path=.env.development --inspect"
   },
   "engines": {
     "node": "16.1.0",
@@ -26,10 +26,9 @@
     "slonik": "^23.0.2"
   },
   "devDependencies": {
-    "dotenv": "^9.0.2",
+    "dotenv": "^10.0.0",
     "eslint": "^7.14.0",
     "eslint-config-airbnb": "^18.2.1",
-    "eslint-plugin-node": "^11.1.0",
-    "nodemon": "^2.0.6"
+    "eslint-plugin-node": "^11.1.0"
   }
 }

@@ -39,6 +39,7 @@ export default class {
     const tags = [formatDate('DD.MM.YYYY')];
     if (/місто Київ/.test(address)) tags.unshift('Київ');
     else if (/Київська обл\./.test(address)) tags.unshift('Київщина');
+    else if (/Одеська обл\./.test(address)) tags.unshift('Одещина');
     else if (/(Тернопільська)|(Львівська) обл\./.test(address)) tags.unshift('Галичина');
     else if (/(Харківська)|(Полтавська) обл\./.test(address)) tags.unshift('Слобожанщина');
     return tags.join(',');

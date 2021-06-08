@@ -1,5 +1,3 @@
-// import organizations from './organizations.cjs';
-
 import {
   notExistsOrganization,
   addOrganization,
