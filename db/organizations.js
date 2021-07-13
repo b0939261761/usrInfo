@@ -11,7 +11,9 @@ export const notExistsOrganization = async code => (await connection.one(slonik.
 //= ============================================================================
 
 export const getStatusCRMNoneOrganization = async () => (await connection.query(slonik.sql`
-  SELECT * FROM "Organizations" WHERE "statusCRM" = 'none' ORDER BY "createdAt";
+  SELECT *
+
+  FROM "Organizations" WHERE "statusCRM" = 'none' ORDER BY "createdAt";
 `)).rows;
 
 //= ============================================================================

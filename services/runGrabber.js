@@ -19,7 +19,11 @@ const amoCRM = new AmoCRM();
 
 const sendContacts = async () => {
   for (const item of await getStatusCRMNoneUfop()) {
-    const statusCRM = item.phone1 ? 'send' : 'unsuitable';
+    const validationDateRegistration = value => (
+      (new Date(new Date().toISOString().slice(0, 10)) - new Date(value)) / 86_400_000 < 31
+    );
+
+    const statusCRM = item.phone1 && validationDateRegistration(item.dateRegistration) ? 'send' : 'unsuitable';
     if (statusCRM === 'send') await amoCRM.send(item);
     await setStatusCRMUfop({ id: item.id, statusCRM, isOrganization: item.isOrganization });
   }

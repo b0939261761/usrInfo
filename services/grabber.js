@@ -41,6 +41,13 @@ const getValuesOrganization = el => {
       dateAndRecordNumber: el.rows[14].cells[1].textContent.trim(),
       contacts: el.rows[29].cells[1].textContent.trim()
     };
+  } if (rowCount === 18) {
+    return {
+      legalForm: el.rows[1].cells[1].textContent.trim(),
+      name: el.rows[2].cells[1].textContent.trim(),
+      dateAndRecordNumber: el.rows[7].cells[1].textContent.trim(),
+      persons: el.rows[10].cells[1].textContent.trim()
+    };
   } if (rowCount === 17) {
     return {
       legalForm: el.rows[1].cells[1].textContent.trim(),
