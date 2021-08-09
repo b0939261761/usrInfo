@@ -15,7 +15,8 @@ export const getLastUfop = async () => {
     data.isOrganization = true;
     return data;
   }
-  return lastPerson();
+  // return lastPerson();
+  return false;
 };
 
 //= ============================================================================
