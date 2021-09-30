@@ -118,35 +118,39 @@ export default async ({ ufopItem, proxy }) => {
 
     const rows = await page.$$('.table-wrapper tr');
     let rowNumber = -1;
-    for (let i = 0; i < rows.length; ++i) {
-      if (ufopItem.isOrganization) {
-        const [cellFullName, cellCode, cellAddress, cellStatus] = await rows[i].evaluate(
-          el => [
-            el.cells[0].textContent.trim().replaceAll('’', '\''),
-            el.cells[1].textContent.trim(),
-            el.cells[2].textContent.trim(),
-            el.cells[3].textContent.trim()
-          ]
-        );
+    if (rows.length === 1) {
+      rowNumber = 0;
+    } else {
+      for (let i = 0; i < rows.length; ++i) {
+        if (ufopItem.isOrganization) {
+          const [cellFullName, cellCode, cellAddress, cellStatus] = await rows[i].evaluate(
+            el => [
+              el.cells[0].textContent.trim().replaceAll('’', '\''),
+              el.cells[1].textContent.trim(),
+              el.cells[2].textContent.trim(),
+              el.cells[3].textContent.trim()
+            ]
+          );
 
-        if (ufopItem.fullName === cellFullName && ufopItem.code === cellCode
+          if (ufopItem.fullName === cellFullName && ufopItem.code === cellCode
           && ufopItem.address === cellAddress && ufopItem.status === cellStatus) {
-          rowNumber = i;
-          break;
-        }
-      } else {
-        const [cellFullName, cellAddress, cellStatus] = await rows[i].evaluate(
-          el => [
-            el.cells[0].textContent.toUpperCase().trim(),
-            el.cells[1].textContent.trim(),
-            el.cells[2].textContent.trim()
-          ]
-        );
+            rowNumber = i;
+            break;
+          }
+        } else {
+          const [cellFullName, cellAddress, cellStatus] = await rows[i].evaluate(
+            el => [
+              el.cells[0].textContent.toUpperCase().trim(),
+              el.cells[1].textContent.trim(),
+              el.cells[2].textContent.trim()
+            ]
+          );
 
-        if (ufopItem.fullName === cellFullName && ufopItem.address === cellAddress
+          if (ufopItem.fullName === cellFullName && ufopItem.address === cellAddress
           && ufopItem.status === cellStatus) {
-          rowNumber = i;
-          break;
+            rowNumber = i;
+            break;
+          }
         }
       }
     }

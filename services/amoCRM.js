@@ -42,6 +42,11 @@ export default class {
     else if (/Одеська обл\./.test(address)) tags.unshift('Одещина');
     else if (/(Тернопільська)|(Львівська) обл\./.test(address)) tags.unshift('Галичина');
     else if (/(Харківська)|(Полтавська) обл\./.test(address)) tags.unshift('Слобожанщина');
+    else if (/(Харківська)|(Полтавська) обл\./.test(address)) tags.unshift('Слобожанщина');
+    else {
+      const region = address.match(/\s\S+\sобл\./);
+      if (region) tags.unshift(region[0].trim());
+    }
     return tags.join(',');
   }
 
